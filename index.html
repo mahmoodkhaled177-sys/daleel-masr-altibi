@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087e8b">
+<title>دليل مصر الطبي</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: #f3f8f9;
+  color: #17343a;
+}
+
+header {
+  background: #087e8b;
+  color: white;
+  padding: 25px 18px 35px;
+}
+
+.container {
+  max-width: 950px;
+  margin: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.logo {
+  background: #ffffff25;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 27px;
+}
+
+header h1 {
+  font-size: 27px;
+  line-height: 1.5;
+  margin: 25px 0 8px;
+}
+
+header p {
+  line-height: 1.9;
+  margin: 0;
+}
+
+main {
+  max-width: 950px;
+  margin: auto;
+  padding: 18px;
+}
+
+.notice {
+  background: #fff5d9;
+  color: #725400;
+  padding: 13px;
+  border-radius: 12px;
+  line-height: 1.8;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: #dff3f1;
+  border-radius: 14px;
+  padding: 14px 8px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 23px;
+  color: #087e8b;
+}
+
+.stat span {
+  font-size: 12px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e0e9eb;
+  border-radius: 16px;
+  padding: 17px;
+  margin-bottom: 18px;
+}
+
+.panel h2 {
+  font-size: 19px;
+  margin-top: 0;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccdadd;
+  border-radius: 11px;
+  font-size: 15px;
+  background: white;
+  margin-bottom: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  border: 1px solid #ccdadd;
+  background: white;
+  color: #17343a;
+  border-radius: 30px;
+  padding: 9px 13px;
+  cursor: pointer;
+}
+
+.filter.active {
+  background: #087e8b;
+  color: white;
+  border-color: #087e8b;
+}
+
+.facility-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.facility {
+  background: white;
+  border: 1px solid #e0e9eb;
+  border-radius: 15px;
+  padding: 16px;
+}
+
+.facility h3 {
+  margin: 8px 0;
+  font-size: 17px;
+}
+
+.type {
+  color: #087e8b;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.meta {
+  color: #536c71;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.status {
+  display: inline-block;
+  background: #fff2d5;
+  color: #765400;
+  padding: 6px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+  margin: 8px 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+.btn {
+  background: #087e8b;
+  color: white;
+  border: 0;
+  padding: 10px 13px;
+  border-radius: 9px;
+  cursor: pointer;
+  margin: 3px 0;
+}
+
+.btn.secondary {
+  background: #dff3f1;
+  color: #123c40;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: #71858b;
+  background: white;
+  border-radius: 14px;
+}
+
+.download-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-top: 1px solid #e5eded;
+}
+
+.download-row small {
+  display: block;
+  color: #71858b;
+  margin-top: 5px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 12px;
+  color: #71858b;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #071b20bb;
+  z-index: 10;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow: auto;
+  background: white;
+  color: #17343a;
+  border-radius: 17px;
+  padding: 20px;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.close {
+  float: left;
+  background: none;
+  border: 0;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+@media(max-width:600px) {
+  .facility-list {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 6px;
+  }
+
+  .stat {
+    padding: 11px 5px;
+  }
+
+  .stat strong {
+    font-size: 19px;
+  }
+
+  header h1 {
+    font-size: 23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand">
+      <div class="logo">✚</div>
+      <div>دليل مصر الطبي</div>
+    </div>
+
+    <h1>المكان الطبي المناسب… أقرب وأسهل</h1>
+
+    <p>
+      دليلك للمستشفيات والوحدات الصحية والعيادات في مصر.
+      ابحث عن المنشأة واعرف معلوماتها وتفاصيلها.
+    </p>
+  </div>
+</header>
+
+<main>
+
+  <div class="notice">
+    <b>تنبيه:</b>
+    دي نسخة أولية. بعض العناوين وأرقام التواصل ومواعيد العيادات
+    تحتاج مراجعة وتأكيد من الجهات الرسمية قبل الاعتماد عليها.
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="countShown">0</strong>
+      <span>منشآت ظاهرة</span>
+    </div>
+
+    <div class="stat">
+      <strong>27</strong>
+      <span>محافظة مستهدفة</span>
+    </div>
+
+    <div class="stat">
+      <strong>6</strong>
+      <span>منشآت أولية</span>
+    </div>
+  </div>
+
+  <section class="panel">
+    <h2>🔎 ابحث عن منشأة طبية</h2>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="اسم المستشفى أو المنطقة أو التخصص..."
+    >
+
+    <select id="area">
+      <option value="all">كل مناطق الفيوم</option>
+      <option value="بندر الفيوم">بندر الفيوم</option>
+      <option value="سنورس">سنورس</option>
+      <option value="أبشواي">أبشواي</option>
+      <option value="طامية">طامية</option>
+      <option value="إطسا">إطسا</option>
+    </select>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-type="all">الكل</button>
+      <button class="filter" data-type="مستشفى عام">عامة</button>
+      <button class="filter" data-type="مستشفى مركزي">مركزية</button>
+      <button class="filter" data-type="مستشفى تخصصي">تخصصية</button>
+    </div>
+  </section>
+
+  <div class="facility-list" id="facilities"></div>
+
+  <section class="panel">
+    <h2>⬇️ المحافظات بدون إنترنت</h2>
+
+    <p class="meta">
+      ميزة تنزيل بيانات المحافظات قيد التطوير.
+      الأزرار التالية لا تحفظ قاعدة بيانات فعلية حتى الآن.
+    </p>
+
+    <div class="download-row">
+      <div>
+        <b>الفيوم</b>
+        <small>بيانات أولية محدودة</small>
+      </div>
+      <button class="btn" onclick="alert('ميزة التحميل الفعلي قيد التطوير')">
+        قريبًا
+      </button>
+    </div>
+
+    <div class="download-row">
+      <div>
+        <b>الدقهلية</b>
+        <small>سيتم إضافة المنشآت بعد تجهيز البيانات</small>
+      </div>
+      <button class="btn secondary" disabled>قريبًا</button>
+    </div>
+
+    <div class="download-row">
+      <div>
+        <b>باقي المحافظات</b>
+        <small>سيتم إضافتها تدريجيًا</small>
+      </div>
+      <button class="btn secondary" disabled>قريبًا</button>
+    </div>
+  </section>
+
+  <footer>
+    دليل مصر الطبي © 2026
+    <br>
+    المعلومات الطبية والإدارية تحتاج مراجعة من مصادرها الرسمية.
+    <br>
+    التطبيق لا يغني عن التواصل مع المستشفى قبل الزيارة.
+  </footer>
+
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <button class="close" id="closeModal">×</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+
+const facilities = [
+  {
+    name: "مستشفى الفيوم العام",
+    type: "مستشفى عام",
+    area: "بندر الفيوم",
+    address: "دار رماد، الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "الأقسام والتخصصات قيد الاستكمال"
+  },
+  {
+    name: "مستشفى سنورس المركزي",
+    type: "مستشفى مركزي",
+    area: "سنورس",
+    address: "مدينة سنورس، الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "الأقسام والتخصصات قيد الاستكمال"
+  },
+  {
+    name: "مستشفى أبشواي المركزي",
+    type: "مستشفى مركزي",
+    area: "أبشواي",
+    address: "مدينة أبشواي، الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "الأقسام والتخصصات قيد الاستكمال"
+  },
+  {
+    name: "مستشفى طامية المركزي",
+    type: "مستشفى مركزي",
+    area: "طامية",
+    address: "مدينة طامية، الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "الأقسام والتخصصات قيد الاستكمال"
+  },
+  {
+    name: "مستشفى إطسا المركزي",
+    type: "مستشفى مركزي",
+    area: "إطسا",
+    address: "مدينة إطسا، الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "الأقسام والتخصصات قيد الاستكمال"
+  },
+  {
+    name: "مستشفى حميات الفيوم",
+    type: "مستشفى تخصصي",
+    area: "بندر الفيوم",
+    address: "الفيوم",
+    phone: "يحتاج تأكيد",
+    hours: "مواعيد العيادات تحتاج تأكيد",
+    specialties: "خدمات الحميات؛ التفاصيل قيد الاستكمال"
+  }
+];
+
+let selectedType = "all";
+
+const list = document.getElementById("facilities");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function render() {
+  const query = document.getElementById("search").value
+    .trim()
+    .toLowerCase();
+
+  const area = document.getElementById("area").value;
+
+  const filtered = facilities.filter(f => {
+    const matchesType =
+      selectedType === "all" || f.type === selectedType;
+
+    const matchesArea =
+      area === "all" || f.area === area;
+
+    const text = [
+      f.name,
+      f.type,
+      f.area,
+      f.address,
+      f.specialties
+    ].join(" ").toLowerCase();
+
+    return matchesType && matchesArea && text.includes(query);
+  });
+
+  document.getElementById("countShown").textContent =
+    filtered.length;
+
+  if (filtered.length === 0) {
+    list.innerHTML =
+      '<div class="empty">مفيش نتائج مطابقة للبحث.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(f => {
+    const index = facilities.indexOf(f);
+
+    return `
+      <article class="facility">
+        <div class="type">${escapeHTML(f.type)} · ${escapeHTML(f.area)}</div>
+
+        <h3>${escapeHTML(f.name)}</h3>
+
+        <div class="meta">
+          📍 ${escapeHTML(f.address)}
+        </div>
+
+        <div class="meta">
+          ☎ ${escapeHTML(f.phone)}
+        </div>
+
+        <div class="status">
+          ⚠ البيانات تحتاج تأكيد
+        </div>
+
+        <div class="actions">
+          <button class="btn" onclick="showDetails(${index})">
+            التفاصيل
+          </button>
+
+          <button class="btn secondary" onclick="showMap(${index})">
+            الخريطة
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function showDetails(index) {
+  const f = facilities[index];
+
+  document.getElementById("modalTitle").textContent = f.name;
+
+  document.getElementById("modalBody").innerHTML = `
+    <p><b>النوع:</b> ${escapeHTML(f.type)}</p>
+    <p><b>المنطقة:</b> ${escapeHTML(f.area)}</p>
+    <p><b>العنوان:</b> ${escapeHTML(f.address)}</p>
+    <p><b>رقم التواصل:</b> ${escapeHTML(f.phone)}</p>
+    <p><b>الأقسام والخدمات:</b> ${escapeHTML(f.specialties)}</p>
+    <p><b>مواعيد العيادات:</b> ${escapeHTML(f.hours)}</p>
+    <p class="notice">
+      البيانات أولية وتحتاج تأكيدًا من المنشأة قبل الزيارة.
+    </p>
+  `;
+
+  document.getElementById("modalBackdrop").classList.add("open");
+}
+
+function showMap(index) {
+  const f = facilities[index];
+
+  const query = encodeURIComponent(
+    f.name + " " + f.address + " Egypt"
+  );
+
+  window.open(
+    "https://www.google.com/maps/search/?api=1&query=" + query,
+    "_blank"
+  );
+}
+
+document.getElementById("closeModal").onclick = () => {
+  document.getElementById("modalBackdrop").classList.remove("open");
+};
+
+document.getElementById("modalBackdrop").onclick = event => {
+  if (event.target.id === "modalBackdrop") {
+    event.currentTarget.classList.remove("open");
+  }
+};
+
+document.getElementById("search").addEventListener("input", render);
+
+document.getElementById("area").addEventListener("change", render);
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedType = button.dataset.type;
+
+    document.querySelectorAll(".filter").forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
+    render();
+  });
+});
+
+render();
+
+</script>
+</body>
+</html>
