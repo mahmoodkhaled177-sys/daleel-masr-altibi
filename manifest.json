@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "دليل مصر الطبي",
+  "short_name": "دليل طبي",
+  "description": "دليلك للبحث عن المستشفيات والمنشآت الطبية في مصر",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4F8F9",
+  "theme_color": "#087E8B",
+  "icons": []
+}
