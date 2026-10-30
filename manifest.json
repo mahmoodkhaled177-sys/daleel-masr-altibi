@@ -10,5 +10,12 @@
   "display": "standalone",
   "background_color": "#F4F8F9",
   "theme_color": "#087E8B",
-  "icons": []
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
